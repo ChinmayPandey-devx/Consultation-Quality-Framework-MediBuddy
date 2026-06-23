@@ -3,277 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consultation Quality Framework | MediBuddy</title>
-    <meta name="description" content="Every consultation, fully prepared. MediBuddy's new quality safety net ensures your doctor knows your case before the call even starts.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Consultation Quality Framework - Prototype</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="app-layout">
+        
+        <!-- PATIENT PANEL (LEFT) -->
+        <main class="patient-panel">
+            <header class="patient-header">
+                <h2>Patient view</h2>
+                <p>Simulating the MediBuddy app experience</p>
+            </header>
 
-    <!-- Header / Nav (Minimal) -->
-    <header class="top-nav">
-        <div class="container nav-container">
-            <div class="logo">
-                <div class="logo-mark"></div>
-                <span class="logo-text">MediBuddy </span> <span class="logo-pill">Internal Concept</span>
+            <div class="tabs">
+                <div class="tab active" data-step="1">1. Upload</div>
+                <div class="tab" data-step="2">2. Symptoms</div>
+                <div class="tab" data-step="3">3. Call</div>
+                <div class="tab" data-step="4">4. Rate</div>
             </div>
-        </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-bg-gradient"></div>
-        <div class="container hero-container">
-            <div class="hero-content">
-                <h1>Every consultation, fully prepared.</h1>
-                <p class="hero-subheadline">We built a quality safety net so your doctor knows your case before the call even starts.</p>
-                <button class="btn btn-primary">Explore the Framework</button>
-            </div>
-            
-            <div class="hero-visual">
-                <!-- Left visual: Doctor's pre-call screen -->
-                <div class="doctor-screen shadow-lg">
-                    <div class="screen-header">
-                        <span class="dot red"></span>
-                        <span class="dot yellow"></span>
-                        <span class="dot green"></span>
+            <!-- STEP 1: UPLOAD -->
+            <div class="step-view active" id="step-1">
+                <div class="field-label">MEDICAL REPORTS</div>
+                <div class="upload-zone" id="upload-zone">
+                    <input type="file" id="file-input" accept=".pdf,.jpg,.png,.jpeg" multiple>
+                    <div class="upload-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
                     </div>
-                    <div class="screen-body">
-                        <div class="patient-info-mini">
-                            <div class="avatar">AK</div>
-                            <div>
-                                <div class="patient-name">Aarav Kumar</div>
-                                <div class="patient-meta">32M • Chronic Migraine</div>
-                            </div>
+                    <p>Tap to upload reports (PDF, JPG, PNG)</p>
+                    <span class="upload-sub">Max 4 files</span>
+                </div>
+                
+                <div class="file-list" id="file-list"></div>
+                
+                <button class="btn btn-primary mt-auto" id="btn-continue-symptoms" disabled>Continue</button>
+            </div>
+
+            <!-- STEP 2: SYMPTOMS -->
+            <div class="step-view" id="step-2">
+                <div class="form-group">
+                    <div class="field-label">CHIEF COMPLAINT</div>
+                    <textarea id="symptoms-input" placeholder="Please describe your symptoms... e.g., 'Experiencing mild headaches for the past 3 days'" rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="field-label">SPECIALTY</div>
+                    <select id="specialty-input">
+                        <option value="General Physician">General Physician</option>
+                        <option value="Neurology">Neurology</option>
+                        <option value="Dermatology">Dermatology</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Orthopedics">Orthopedics</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary mt-auto" id="btn-submit-consult">Send to doctor & join call</button>
+            </div>
+
+            <!-- STEP 3: CALL -->
+            <div class="step-view" id="step-3">
+                <div class="call-card">
+                    <div class="call-header">
+                        <div class="doc-avatar">DM</div>
+                        <div class="doc-info">
+                            <h3>Dr. Mehta</h3>
+                            <span><span id="call-specialty-display">Neurologist</span></span>
                         </div>
-                        <div class="ai-summary">
-                            <span class="badge badge-ai">✨ AI Summary generated</span>
-                            <p class="summary-text">Patient reports persistent headaches for 3 weeks. Last prescribed Paracetamol 500mg. Uploaded new MRI scan yesterday.</p>
-                        </div>
-                        <div class="mri-thumbnail">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                            <span>MRI_Brain_Scan.pdf</span>
-                        </div>
-                        <button class="btn-review">I've reviewed this case &rarr;</button>
                     </div>
-                </div>
-
-                <!-- Right visual: Patient's phone -->
-                <div class="patient-phone shadow-xl">
-                    <div class="phone-notch"></div>
-                    <div class="phone-content">
-                        <div class="pulse-ring"></div>
-                        <div class="phone-avatar"><img src="https://ui-avatars.com/api/?name=Dr+S&background=0D9488&color=fff&rounded=true&size=64" alt="Doctor Avatar"></div>
-                        <h3 class="phone-status">Your doctor is reviewing your case</h3>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar animated"></div>
-                        </div>
-                        <p class="phone-subtext">Dr. Sharma is reading your uploaded reports to prepare for the consultation.</p>
+                    <div class="call-status" id="patient-call-status">
+                        Waiting for doctor to review your case...
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- The Problem Section -->
-    <section class="problem-section bg-surface">
-        <div class="container">
-            <div class="section-header center">
-                <span class="section-label">What was going wrong</span>
-                <h2>The friction in virtual consultations</h2>
-            </div>
-            
-            <div class="grid-3">
-                <div class="card problem-card">
-                    <div class="icon-wrapper">🗂️</div>
-                    <h3>Doctors joining cold</h3>
-                    <p>Reports uploaded. Never opened. Patients had to repeat their medical history from scratch every time.</p>
-                </div>
-                <div class="card problem-card">
-                    <div class="icon-wrapper">📉</div>
-                    <h3>4-minute consultations</h3>
-                    <p>Generic questions. Generic prescriptions. Rushed calls led to poor clinical outcomes and dissatisfied users.</p>
-                </div>
-                <div class="card problem-card">
-                    <div class="icon-wrapper">😞</div>
-                    <h3>Trust lost forever</h3>
-                    <p>₹800 spent. 5 friends warned. A single bad experience creates a ripple effect of churned users.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- The Solution: Feature Panels -->
-    <section class="solution-section">
-        <div class="container">
-            <div class="section-header center mb-large">
-                <span class="section-label">The Solution</span>
-                <h2>A unified quality guardian</h2>
-            </div>
-
-            <!-- Panel A -->
-            <div class="feature-panel">
-                <div class="feature-content">
-                    <span class="feature-label">Pre-Consult</span>
-                    <h2>60-second case briefing before every call.</h2>
-                    <p>We synthesize past consultations, uploaded lab reports, and the current chief complaint into an actionable, instantly readable card.</p>
-                </div>
-                <div class="feature-visual panel-a-visual">
-                    <div class="doctor-facing-ui shadow-md">
-                        <div class="ui-header">Patient Briefing</div>
-                        <div class="ui-content">
-                            <div class="patient-id">
-                                <h3>Neha Gupta</h3>
-                                <span>Chief Complaint: Severe lower back pain</span>
-                            </div>
-                            <div class="docs-grid">
-                                <div class="doc-thumb"><div class="doc-icon">🩸</div> Blood Report</div>
-                                <div class="doc-thumb"><div class="doc-icon">🩻</div> MRI Lumbar</div>
-                            </div>
-                            <div class="last-consult">
-                                <strong>Last Consult (2 mos ago):</strong> Diagnosed with muscle strain. Prescribed muscle relaxants.
-                            </div>
-                            <button class="btn btn-primary full-width">Mark as Reviewed & Join Call</button>
-                        </div>
-                        <!-- Annotations -->
-                        <div class="annotation ann-1">AI-extracted summary</div>
-                        <div class="annotation ann-2">Mandatory acknowledgment</div>
+                    <div class="call-actions">
+                        <button class="btn-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                        </button>
+                        <button class="btn-icon btn-end" id="btn-end-call">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.42 19.42 0 0 1-3.33-2.67m-2.67-3.34a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91"></path><line x1="23" y1="1" x2="1" y2="23"></line></svg>
+                        </button>
+                    </div>
+                    <div class="quality-bar-container">
+                        <div class="quality-bar pulse"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Panel B -->
-            <div class="feature-panel reverse">
-                <div class="feature-content">
-                    <span class="feature-label">During Consult</span>
-                    <h2>No more pixelated consultations.</h2>
-                    <p>The platform adapts so the conversation never stops. Our WebRTC quality guardian detects bandwidth drops and proactively suggests graceful fallbacks.</p>
+            <!-- STEP 4: RATING -->
+            <div class="step-view" id="step-4">
+                <div class="rating-container">
+                    <h3>How was your consultation?</h3>
+                    <p>Your feedback helps us improve.</p>
+                    <div class="stars-interactive" id="stars-interactive">
+                        <span data-value="1">★</span>
+                        <span data-value="2">★</span>
+                        <span data-value="3">★</span>
+                        <span data-value="4">★</span>
+                        <span data-value="5">★</span>
+                    </div>
                 </div>
-                <div class="feature-visual panel-b-visual">
-                    <div class="mobile-consult-ui shadow-xl">
-                        <div class="video-feed-mock">
-                            <div class="doctor-video-placeholder"></div>
-                            <div class="self-video-placeholder"></div>
+
+                <!-- Recovery Card (≤3 stars) -->
+                <div class="escalation-card" id="escalation-card" style="display: none;">
+                    <div class="escalation-icon">!</div>
+                    <div class="escalation-content">
+                        <h4>We noticed this wasn't ideal</h4>
+                        <p>A free follow-up has been arranged and your feedback has been escalated to the medical quality team.</p>
+                        <button class="btn btn-outline">Book free follow-up</button>
+                    </div>
+                </div>
+
+                <!-- Success Card (4-5 stars) -->
+                <div class="success-card" id="success-card" style="display: none;">
+                    <div class="success-icon">✓</div>
+                    <div class="success-content">
+                        <h4>Thank you</h4>
+                        <p>Your prescription has been sent to MediBuddy Pharmacy.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- DOCTOR PANEL (RIGHT) -->
+        <aside class="doctor-panel">
+            <header class="doctor-header">
+                <h2>Doctor view</h2>
+                <p>Simulating the provider portal</p>
+            </header>
+
+            <div class="doc-content">
+                <!-- IDLE STATE -->
+                <div class="doc-state" id="doc-idle">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                    <p>Waiting for patient to upload reports.</p>
+                </div>
+
+                <!-- LOADING STATE -->
+                <div class="doc-state" id="doc-loading" style="display: none;">
+                    <div class="bouncing-dots">
+                        <div></div><div></div><div></div>
+                    </div>
+                    <p>Generating AI summary...</p>
+                </div>
+
+                <!-- SUMMARY STATE -->
+                <div class="doc-state doc-summary-container" id="doc-summary" style="display: none;">
+                    <div class="ai-card">
+                        <div class="ai-header">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg>
+                            AI Case Summary — Generated from patient reports + symptoms
                         </div>
-                        <div class="bottom-sheet slide-up">
-                            <div class="sheet-handle"></div>
-                            <div class="alert-header">
-                                <span class="signal-icon amber">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
-                                </span>
-                                <h4>Connection Unstable</h4>
+                        <div class="ai-body">
+                            <div class="field-label">CHIEF COMPLAINT</div>
+                            <p class="ai-text" id="ai-chief-complaint"></p>
+
+                            <div class="field-label mt-4">UPLOADED DOCUMENTS</div>
+                            <div class="doc-grid" id="ai-doc-grid"></div>
+
+                            <div class="field-label mt-4">KEY FLAGS</div>
+                            <div class="flag-badges">
+                                <span class="badge amber">Elevated pressure markers</span>
+                                <span class="badge teal">Symptoms: 3 days</span>
                             </div>
-                            <p>Your connection quality has dropped. Switch to audio-only for a clearer experience?</p>
-                            <div class="sheet-actions">
-                                <button class="btn btn-outline">Keep Video</button>
-                                <button class="btn btn-warning">Switch Now</button>
+                            <p class="ai-note">Recommend reviewing MRI before prescribing.</p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary full-width mt-4" id="btn-doc-confirm">I've reviewed this case — join call</button>
+                </div>
+
+                <!-- CONFIRMED STATE -->
+                <div class="doc-state doc-confirmed-container" id="doc-confirmed" style="display: none;">
+                    <div class="reviewed-badge">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Case reviewed — confirmed at <span id="confirm-time"></span>
+                    </div>
+
+                    <div class="doc-call-card">
+                        <div class="call-header">
+                            <div class="pat-avatar">RK</div>
+                            <div class="doc-info">
+                                <h3>Ravi Kumar</h3>
+                                <span>Connected · <span id="doc-specialty-display">Neurological</span> consultation</span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Panel C -->
-            <div class="feature-panel">
-                <div class="feature-content">
-                    <span class="feature-label">Post-Consult</span>
-                    <h2>A bad experience triggers a recovery flow — automatically.</h2>
-                    <p>If a patient rates a call 1 or 2 stars, we don't just log it. We instantly deploy an automated care recovery protocol to make things right before they leave the app.</p>
-                </div>
-                <div class="feature-visual panel-c-visual">
-                    <div class="rating-ui shadow-md">
-                        <h3 class="rating-title">How was your consultation?</h3>
-                        <div class="stars">
-                            <span class="star active">★</span>
-                            <span class="star active">★</span>
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                            <span class="star">★</span>
-                        </div>
-                        <div class="recovery-card slide-down">
-                            <div class="recovery-icon">🤝</div>
-                            <h4>We're sorry this didn't meet your expectations.</h4>
-                            <p>Your health is our priority. Would you like a free follow-up consultation with a senior specialist?</p>
-                            <button class="btn btn-primary full-width mt-sm">Claim Free Follow-up</button>
-                        </div>
-                    </div>
-                </div>
             </div>
-
-        </div>
-    </section>
-
-    <!-- Metrics Strip -->
-    <section class="metrics-strip">
-        <div class="container">
-            <div class="metrics-grid">
-                <div class="metric-item">
-                    <div class="metric-icon">🎯</div>
-                    <div class="metric-value">4.2+ / 5</div>
-                    <div class="metric-label">Target Rating</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-icon">✅</div>
-                    <div class="metric-value">100%</div>
-                    <div class="metric-label">Pre-review confirmation</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-icon">🔁</div>
-                    <div class="metric-value">+28%</div>
-                    <div class="metric-label">30-day repeat booking</div>
-                </div>
-                <div class="metric-item">
-                    <div class="metric-icon">📹</div>
-                    <div class="metric-value">< 5%</div>
-                    <div class="metric-label">Video quality events</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works (Timeline) -->
-    <section class="timeline-section bg-surface">
-        <div class="container">
-            <div class="section-header center">
-                <h2>How It Works</h2>
-            </div>
-            
-            <div class="timeline-container">
-                <div class="timeline-line"></div>
-                <div class="timeline-step">
-                    <div class="step-dot">1</div>
-                    <h4>Before the call</h4>
-                    <p>AI organizes history and forces doctor review.</p>
-                </div>
-                <div class="timeline-step">
-                    <div class="step-dot">2</div>
-                    <h4>During the call</h4>
-                    <p>Adaptive WebRTC prevents drop-offs.</p>
-                </div>
-                <div class="timeline-step">
-                    <div class="step-dot">3</div>
-                    <h4>After the call</h4>
-                    <p>Automated recovery for poor experiences.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer CTA -->
-    <footer class="footer-cta">
-        <div class="container center">
-            <div class="footer-content">
-                <h2>Built for MediBuddy.</h2>
-                <p>Designed to make every ₹800 feel worth it.</p>
-                <div class="footer-actions">
-                    <button class="btn btn-ghost">View More PM Work</button>
-                    <button class="btn btn-ghost">Read the Full Case Study</button>
-                </div>
-            </div>
-        </div>
-    </footer>
+        </aside>
+    </div>
 
     <script src="script.js"></script>
 </body>
